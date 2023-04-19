@@ -32,7 +32,7 @@ DEFAULTS = {
 if os.path.isfile("config.json"):
     with open("config.json") as f:
         DEFAULTS.update(json.load(f))
-elif not os.getenv("BRAGI_INSTALLING"):
+elif not os.getenv("SENKU_INSTALLING"):
     with open("config.json", "w") as f:
         json.dump(DEFAULTS, f, indent=2)
 
