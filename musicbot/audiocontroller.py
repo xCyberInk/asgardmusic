@@ -381,17 +381,12 @@ class AudioController(object):
         data = None
 
         if host == linkutils.Sites.Unknown:
-            if linkutils.get_url(track) is not None:
-                return None
-
-            data = await self.search_youtube(track)
+            title = await linkutils.convert_spotify(track)
+            data = await self.search_youtube(title)
 
         elif host == linkutils.Sites.Spotify:
             title = await linkutils.convert_spotify(track)
             data = await self.search_youtube(title)
-
-        elif host == linkutils.Sites.YouTube:
-            track = track.split("&list=")[0]
 
         song = Song(linkutils.Origins.Default, host, webpage_url=track)
         if data:
@@ -409,40 +404,7 @@ class AudioController(object):
 
     async def process_playlist(self, playlist_type: linkutils.Playlist_Types, url: str):
 
-        if playlist_type == linkutils.Playlist_Types.YouTube_Playlist:
             
-            print("Youtube Links No soportados")
-            
-            if "playlist?list=" in url:
-                # listid = url.split("=")[1]
-                pass
-            else:
-                video = url.split("&")[0]
-                await self.process_song(video)
-                return
-
-            options = {
-                "format": "bestaudio/best",
-                "extract_flat": True,
-                "cookiefile": config.COOKIE_PATH,
-                "quiet": True,
-            }
-
-            r = await self.extract_info(url, options)
-
-            for entry in r["entries"]:
-
-                link = "https://www.youtube.com/watch?v={}".format(entry["id"])
-
-                song = Song(
-                    linkutils.Origins.Playlist,
-                    linkutils.Sites.YouTube,
-                    webpage_url=link,
-                )
-
-                self.playlist.add(song)
-                
-
         if playlist_type == linkutils.Playlist_Types.Spotify_Playlist:
             links = await linkutils.get_spotify_playlist(url)
             for link in links:
