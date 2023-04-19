@@ -1,10 +1,10 @@
-aiohttp==3.8.3
-aiosignal==1.3.1
-async-timeout==4.0.2
-attrs==22.1.0
-charset-normalizer==2.1.1
-discord.py==2.1.0
-frozenlist==1.3.3
-idna==3.4
-multidict==6.0.3
-yarl==1.8.2
+py-cord[voice] @ https://github.com/Krutyi-4el/pycord/archive/10ce5cec7db3ded3153a2d3d03cb8b40bbbb3539.zip
+yt-dlp==2023.3.4
+aiohttp==3.8.4
+beautifulsoup4==4.12.0
+spotipy==2.22.1
+emoji==2.2.0
+SQLAlchemy[asyncio]==2.0.7
+alembic==1.10.2 
+ffmpeg-python==0.2.0
+./config

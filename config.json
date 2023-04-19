@@ -1,0 +1,14 @@
+{
+    "BOT_TOKEN": "MTA5NTQxNjk3NTAyODY1MDA0Ng.G9mzA1.zrUpqTdFbN8Tn9LsoBeMoT-CLrbsGQ4loi1-RI",
+    "SPOTIFY_ID": "cb9c5371a4b247d88d7fe63b9379d717",
+    "SPOTIFY_SECRET": "91694da0d6b94437873156fc934a3ca3",
+    "BOT_PREFIX": "p",
+    "ENABLE_SLASH_COMMANDS": false,
+    "VC_TIMEOUT": 600,
+    "VC_TIMOUT_DEFAULT": true,
+    "MAX_SONG_PRELOAD": 5,
+    "MAX_HISTORY_LENGTH": 10,
+    "MAX_TRACKNAME_HISTORY_LENGTH": 15,
+    "DATABASE_URL": "sqlite:///settings.db"
+  }
+  
