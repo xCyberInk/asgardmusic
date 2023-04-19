@@ -16,8 +16,6 @@ from musicbot.utils import CheckError, compare_components, play_check
 if TYPE_CHECKING:
     from musicbot.bot import MusicBot
 
-
-_cached_downloaders: List[Tuple[dict, yt_dlp.YoutubeDL]] = []
 _not_provided = object()
 _search_lock = asyncio.Lock()
 
@@ -118,7 +116,6 @@ class AudioController(object):
                 break
         else:
             # we need to copy options because downloader modifies the given dict
-            downloader = yt_dlp.YoutubeDL(options.copy())
             _cached_downloaders.append((options, downloader))
         # if options in _cached_downloaders:
         #     downloader = _cached_downloaders[options]
@@ -141,8 +138,6 @@ class AudioController(object):
                 },
             )
         except Exception as e:
-            if isinstance(e, yt_dlp.DownloadError) and e.exc_info[1].expected:
-                return False
             info = await self.extract_info(
                 song, {"title": True, "cookiefile": config.COOKIE_PATH, "quiet": True}
             )
