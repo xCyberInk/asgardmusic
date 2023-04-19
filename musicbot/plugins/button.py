@@ -6,7 +6,6 @@ from musicbot.bot import MusicBot
 SUPPORTED_SITES = (
     linkutils.Sites.Spotify,
     linkutils.Sites.Spotify_Playlist,
-    linkutils.Sites.YouTube,
 )
 
 
