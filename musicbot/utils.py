@@ -27,8 +27,8 @@ if TYPE_CHECKING:
 
 def check_dependencies():
     assert pycord_version == "2.5", (
-        "you don't have necessary version of Pycord."
-        " Please install the version specified in requirements.txt"
+        "No tienes la versión necesaria de Pycord."
+        " Por favor instala la versión especificada en requirements.txt"
     )
     try:
         check_call("ffmpeg --help", stdout=DEVNULL, stderr=DEVNULL, shell=True)

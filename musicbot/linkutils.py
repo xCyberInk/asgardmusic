@@ -108,7 +108,6 @@ def get_url(content: str) -> Optional[str]:
 class Sites(Enum):
     Spotify = "Spotify"
     Spotify_Playlist = "Spotify Playlist"
-    YouTube = "YouTube"
     Twitter = "Twitter"
     SoundCloud = "SoundCloud"
     Bandcamp = "Bandcamp"
@@ -118,7 +117,6 @@ class Sites(Enum):
 
 class Playlist_Types(Enum):
     Spotify_Playlist = "Spotify Playlist"
-    YouTube_Playlist = "YouTube Playlist"
     BandCamp_Playlist = "BandCamp Playlist"
     Unknown = "Unknown"
 
