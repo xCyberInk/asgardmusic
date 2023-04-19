@@ -11,7 +11,7 @@ from spotipy.oauth2 import SpotifyClientCredentials
 try:
     sp_api = spotipy.Spotify(
         auth_manager=SpotifyClientCredentials(
-            client_id=config.SPOTIFY_ID, client_secret=config.SPOTIFY_SECRET
+            client_id=os.environ['SPOTIFY_ID'], client_secret=os.environ['SPOTIFY_SECRET']
         )
     )
     api = True
@@ -76,7 +76,7 @@ async def get_spotify_playlist(url: str) -> list:
                         pass
                 return links
         except Exception:
-            if config.SPOTIFY_ID != "" or config.SPOTIFY_SECRET != "":
+            if os.environ['SPOTIFY_ID'] != "" or os.environ['SPOTIFY_SECRET'] != "":
                 print("ERROR: Check spotify CLIENT_ID and SECRET")
 
     async with aiohttp.ClientSession(headers=headers) as session:
