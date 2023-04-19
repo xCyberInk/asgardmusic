@@ -7,9 +7,7 @@ from config.utils import get_env_var, alchemize_url
 
 
 DEFAULTS = {
-    "BOT_TOKEN": "MTA5NTQxNjk3NTAyODY1MDA0Ng.G9mzA1.zrUpqTdFbN8Tn9LsoBeMoT-CLrbsGQ4loi1-RI",
-    "SPOTIFY_ID": "cb9c5371a4b247d88d7fe63b9379d717",
-    "SPOTIFY_SECRET": "91694da0d6b94437873156fc934a3ca3",
+   
 
     "BOT_PREFIX": "p",  # set to empty string to disable
     "ENABLE_SLASH_COMMANDS": False,
