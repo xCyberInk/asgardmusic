@@ -30,6 +30,7 @@ def check_dependencies():
         "No tienes la versión necesaria de Pycord."
         " Por favor instala la versión especificada en requirements.txt"
     )
+    
     try:
         check_call("ffmpeg --help", stdout=DEVNULL, stderr=DEVNULL, shell=True)
     except Exception as e:
