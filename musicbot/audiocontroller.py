@@ -16,8 +16,6 @@ from musicbot.utils import CheckError, compare_components, play_check
 if TYPE_CHECKING:
     from musicbot.bot import MusicBot
 
-
-_cached_downloaders: List[Tuple[dict, yt_dlp.YoutubeDL]] = []
 _not_provided = object()
 _search_lock = asyncio.Lock()
 
@@ -118,7 +116,6 @@ class AudioController(object):
                 break
         else:
             # we need to copy options because downloader modifies the given dict
-            downloader = yt_dlp.YoutubeDL(options.copy())
             _cached_downloaders.append((options, downloader))
         # if options in _cached_downloaders:
         #     downloader = _cached_downloaders[options]
@@ -512,28 +509,7 @@ class AudioController(object):
         if rerun_needed:
             self.add_task(self.preload_queue())
 
-    async def search_youtube(self, title: str) -> Optional[dict]:
-        """Searches youtube for the video title and returns the first results video link"""
-
-        # if title is already a link
-        if linkutils.get_url(title) is not None:
-            return title
-
-        options = {
-            "format": "bestaudio/best",
-            "default_search": "auto",
-            "noplaylist": True,
-            "cookiefile": config.COOKIE_PATH,
-            "quiet": True,
-        }
-
-        r = await self.extract_info("ytsearch:" + title, options)
-
-        if not r:
-            return None
-
-        return r["entries"][0]
-
+    
     def stop_player(self):
         """Stops the player and removes all songs from the queue"""
         if not self.is_active():
