@@ -5,7 +5,6 @@ from inspect import isawaitable
 from typing import TYPE_CHECKING, Coroutine, Optional, List, Tuple
 
 import discord
-import yt_dlp
 from config import config
 
 from musicbot import linkutils, utils
@@ -414,7 +413,9 @@ class AudioController(object):
     async def process_playlist(self, playlist_type: linkutils.Playlist_Types, url: str):
 
         if playlist_type == linkutils.Playlist_Types.YouTube_Playlist:
-
+            
+            print("Youtube Links No Soportados")
+            """
             if "playlist?list=" in url:
                 # listid = url.split("=")[1]
                 pass
@@ -443,6 +444,7 @@ class AudioController(object):
                 )
 
                 self.playlist.add(song)
+                """
 
         if playlist_type == linkutils.Playlist_Types.Spotify_Playlist:
             links = await linkutils.get_spotify_playlist(url)
