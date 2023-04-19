@@ -1,6 +1,5 @@
 from __future__ import annotations
 import re
-import ffmpeg   
 import sys
 import asyncio
 from subprocess import DEVNULL, check_call
@@ -31,54 +30,7 @@ def check_dependencies():
         " Por favor instala la versión especificada en requirements.txt"
     )
     
-    try:
-        check_call("ffmpeg --help", stdout=DEVNULL, stderr=DEVNULL, shell=True)
-    except Exception as e:
-        if sys.platform == "win32":
-            download_ffmpeg()
-        else:
-            raise RuntimeError("ffmpeg was not found") from e
-    try:
-        opus.Encoder.get_opus_version()
-    except opus.OpusNotLoaded as e:
-        raise RuntimeError("opus was not found") from e
-
-
-def download_ffmpeg():
-    from io import BytesIO
-    from ssl import SSLContext
-    from zipfile import ZipFile
-    from urllib.request import urlopen
-
-    print("Downloading ffmpeg automatically...")
-    stream = urlopen(
-        "https://github.com/Krutyi-4el/FFmpeg/releases/download/v5.1.git/ffmpeg.zip",
-        context=SSLContext(),
-    )
-    total_size = int(stream.getheader("content-length") or 0)
-    file = BytesIO()
-    if total_size:
-        BLOCK_SIZE = 1024 * 1024
-
-        data = stream.read(BLOCK_SIZE)
-        received_size = BLOCK_SIZE
-        percentage = -1
-        while data:
-            file.write(data)
-            data = stream.read(BLOCK_SIZE)
-            received_size += len(data)
-            new_percentage = int(received_size / total_size * 100)
-            if new_percentage != percentage:
-                print("\r", new_percentage, "%", sep="", end="")
-                percentage = new_percentage
-    else:
-        file.write(stream.read())
-    zipf = ZipFile(file)
-    filename = [name for name in zipf.namelist() if name.endswith("ffmpeg.exe")][0]
-    with open("ffmpeg.exe", "wb") as f:
-        f.write(zipf.read(filename))
-    print("\nSuccess!")
-
+    
 
 
 def get_guild(bot: MusicBot, command: Message) -> Optional[Guild]:
