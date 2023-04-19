@@ -378,22 +378,15 @@ class AudioController(object):
             song = Song(linkutils.Origins.Playlist, linkutils.Sites.Unknown)
             return song
 
-        data = None
 
         if host == linkutils.Sites.Unknown:
             title = await linkutils.convert_spotify(track)
-            data = await self.search_youtube(title)
 
         elif host == linkutils.Sites.Spotify:
             title = await linkutils.convert_spotify(track)
-            data = await self.search_youtube(title)
 
         song = Song(linkutils.Origins.Default, host, webpage_url=track)
-        if data:
-            song.update(data)
-        else:
-            if not await self.fetch_song_info(song):
-                return None
+        
 
         self.playlist.add(song)
         if self.current_song is None:
@@ -451,11 +444,7 @@ class AudioController(object):
 
         if song.host == linkutils.Sites.Spotify:
             title = await linkutils.convert_spotify(song.info.webpage_url)
-            data = await self.search_youtube(title)
-            if data:
-                song.update(data)
-            else:
-                success = False
+            
 
         elif not await self.fetch_song_info(song):
             success = False

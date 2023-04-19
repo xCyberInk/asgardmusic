@@ -69,10 +69,4 @@ class Song:
 
             return embed
 
-    def update(self, data: dict):
-        self.base_url = data.get("url")
-        self.info.uploader = data.get("uploader")
-        self.info.title = data.get("title")
-        self.info.duration = data.get("duration")
-        self.info.webpage_url = data.get("webpage_url")
-        self.info.thumbnail = data.get("thumbnails")[0]["url"]
+
