@@ -53,7 +53,7 @@ if __name__ == "__main__":
 
     check_dependencies()
 
-    if not config.BOT_TOKEN:
+    if not os.environ["DISCORD_TOKEN"]:
         print("Error: No bot token!")
         exit()
 

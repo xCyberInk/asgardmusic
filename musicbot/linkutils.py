@@ -11,7 +11,7 @@ from spotipy.oauth2 import SpotifyClientCredentials
 try:
     sp_api = spotipy.Spotify(
         auth_manager=SpotifyClientCredentials(
-            client_id=os.environ['SPOTIFY_ID'], client_secret=os.environ['SPOTIFY_SECRET']
+            client_id=os.environ["SPOTIFY_ID"], client_secret=os.environ["SPOTIFY_SECRET"]
         )
     )
     api = True
