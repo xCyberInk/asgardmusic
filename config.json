@@ -1,4 +1,5 @@
 {
+ 
     "BOT_PREFIX": "p",
     "ENABLE_SLASH_COMMANDS": false,
     "VC_TIMEOUT": 600,

@@ -108,24 +108,6 @@ class AudioController(object):
     async def register_voice_channel(self, channel: discord.VoiceChannel):
         await channel.connect(reconnect=True, timeout=None)
 
-    async def extract_info(self, url: str, options: dict) -> dict:
-        downloader = None
-        for o, d in _cached_downloaders:
-            if o == options:
-                downloader = d
-                break
-        else:
-            # we need to copy options because downloader modifies the given dict
-            _cached_downloaders.append((options, downloader))
-        # if options in _cached_downloaders:
-        #     downloader = _cached_downloaders[options]
-        # else:
-        #     downloader = _cached_downloaders[options] = yt_dlp.YoutubeDL(options)
-        async with _search_lock:
-            return await self.bot.loop.run_in_executor(
-                None, downloader.extract_info, url, False
-            )
-
     async def fetch_song_info(self, song: Song) -> bool:
         try:
             info = await self.extract_info(
