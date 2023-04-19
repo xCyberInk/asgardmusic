@@ -16,6 +16,8 @@ from musicbot.utils import CheckError, compare_components, play_check
 if TYPE_CHECKING:
     from musicbot.bot import MusicBot
 
+
+_cached_downloaders: List[Tuple[dict, yt_dlp.YoutubeDL]] = []
 _not_provided = object()
 _search_lock = asyncio.Lock()
 
@@ -116,6 +118,7 @@ class AudioController(object):
                 break
         else:
             # we need to copy options because downloader modifies the given dict
+            downloader = yt_dlp.YoutubeDL(options.copy())
             _cached_downloaders.append((options, downloader))
         # if options in _cached_downloaders:
         #     downloader = _cached_downloaders[options]
@@ -411,8 +414,8 @@ class AudioController(object):
 
         if playlist_type == linkutils.Playlist_Types.YouTube_Playlist:
             
-            print("Youtube Links No Soportados")
-            """
+            print("Youtube Links No soportados")
+            
             if "playlist?list=" in url:
                 # listid = url.split("=")[1]
                 pass
@@ -441,7 +444,7 @@ class AudioController(object):
                 )
 
                 self.playlist.add(song)
-                """
+                
 
         if playlist_type == linkutils.Playlist_Types.Spotify_Playlist:
             links = await linkutils.get_spotify_playlist(url)
